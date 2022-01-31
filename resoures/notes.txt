@@ -1,0 +1,16 @@
+Performance test (2022.01.17.)
+
+Testing the effect of using spacy language model during SQL database creation.
+
+--> read from xlsx to dataframe
+--> create MySQL records from dataframe rows
+--> effect of analyzing exactly one column (SQL field) / row:
+        ~1400 record, without nlp:                       						                            13470.865 ms
+        ~1400 record, with nlp, 1 analyzed line (approx. 100 character text): 		                        17147.253 ms
+        ~1400 record, with nlp, all ~1400 lines analyzed (approx. 100*1400=140.000 character text):		    45855.558 ms
+
+
+Full Runtime (2022.01.29)
+
+--> Analyzing a total of 761938 tokens (35476 sentences):   8328710.821 ms
+--> (that's approximately 138 minutes - 2 hours 18 minutes)
