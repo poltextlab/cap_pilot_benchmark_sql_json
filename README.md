@@ -116,6 +116,7 @@ This project is intended to support automatic SQL corpus generation from `.xlsx`
 - - - -
 
 * MySQL installed ([link](https://dev.mysql.com/downloads/windows/installer/8.0.html))
+    * Needed components: MySQL Shell, and MySQL Server (!)
 * MySQL Service is running:
     * at Start menu, search for 'Services' ('szolgáltatások'),
     * search for MySQL,
