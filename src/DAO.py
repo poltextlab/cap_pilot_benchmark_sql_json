@@ -18,6 +18,10 @@ def start(debug=False) -> None:
     __init_database(host=HOST, user=USER, password=PASSWORD, name=DATABASE_NAME, debug=debug)
 
 
+def get_database_reference():
+    return __get_connection(host=HOST, user=USER, password=PASSWORD, database=DATABASE_NAME)
+
+
 def check_tables() -> None:
     """
     Prints to standard output the names of already existing tables in database.
