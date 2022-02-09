@@ -1,4 +1,4 @@
-### SQL corpus generator
+### SQL/JSON corpus generator
 
 This project is intended to support automatic SQL corpus generation from `.xlsx` input file.<br>
 
