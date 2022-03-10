@@ -1,4 +1,4 @@
-### SQL/JSON corpus generator
+### SQL corpus generator
 
 This project is intended to support automatic SQL corpus generation from `.xlsx` input file.<br>
 
@@ -50,6 +50,7 @@ This project is intended to support automatic SQL corpus generation from `.xlsx`
 | video_felszolalas_ido | time         | YES  |     | NULL    |       |
 | video_feszolalas_url  | varchar(200) | YES  |     | NULL    |       |
 | felszolalas_url       | varchar(500) | YES  |     | NULL    |       |
+| COVID                 | int          | YES  |     | NULL    |       |
 | cycle_number          | int          | YES  | MUL | NULL    |       |
 | parliamentary_id      | varchar(20)  | YES  | MUL | NULL    |       |
 
@@ -310,6 +311,7 @@ Example entries in the json file:
             "video_felszolalas_ido": "0 days 05:04:00",
             "video_feszolalas_url": "https://sgis.parlament.hu/archive/playseq.php?date1=20140512&time1=121752&offset1=001901.201&date2=20140512&time2=121752&offset2=002405.96&type=real",
             "felszolalas_url": "https://www.parlament.hu:443/web/guest/orszaggyulesi-naplo-elozo-ciklusbeli-adatai?p_p_id=hu_parlament_cms_pair_portlet_PairProxy_INSTANCE_9xd2Wc9jP4z8&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_auth=JieFdrJ9&_hu_parlament_cms_pair_portlet_PairProxy_INSTANCE_9xd2Wc9jP4z8_pairAction=%2Finternet%2Fcplsql%2Fogy_naplo.naplo_fadat%3Fp_ckl%3D40%26p_uln%3D3%26p_felsz%3D2%26p_szoveg%3D%26p_felszig%3D2",
+            "covid" : "0",
             "cycle_number": "7",
             "parliamentary_id": "s100"
         },
