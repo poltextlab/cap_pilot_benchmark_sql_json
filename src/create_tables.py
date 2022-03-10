@@ -94,6 +94,7 @@ def create_all(drop: bool = False) -> None:
        `felszolalas_url` VARCHAR(500),
        `cycle_number` INT(2),
        `parliamentary_id` VARCHAR(100),
+       `COVID` INT(1),
        FOREIGN KEY (`cycle_number`) REFERENCES parlamenti_ciklus(`cycle_number`),
        FOREIGN KEY (`parliamentary_id`) REFERENCES kepviselo(`parliamentary_id`)
      )

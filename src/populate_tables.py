@@ -74,9 +74,10 @@ def __populate_table_felszolalas(df: pd.DataFrame, drop: bool, nlp: hu_core_news
         felszolalas_url = __replace_zero_to_none(row['felszolalas_url'])
         cycle_number = __replace_zero_to_none(row['cycle_number'])
         parliamentary_id = __replace_zero_to_none(row['parliamentary_id'])
+        covid = __replace_zero_to_none(row['COVID'])
 
-        insert_statement = ("INSERT INTO `felszolalas` (`text_id`, `exact_date`, `tokenszam`, `text`, `napirendi_pont`, `video_felszolalas_ido`, `video_feszolalas_url`, `felszolalas_url`, `cycle_number`, `parliamentary_id`) " "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
-        data = (text_id, exact_date, tokenszam, text, napirendi_pont, video_felszolalas_ido, video_feszolalas_url, felszolalas_url, cycle_number, parliamentary_id)
+        insert_statement = ("INSERT INTO `felszolalas` (`text_id`, `exact_date`, `tokenszam`, `text`, `napirendi_pont`, `video_felszolalas_ido`, `video_feszolalas_url`, `felszolalas_url`, `covid`, `cycle_number`, `parliamentary_id`) " "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        data = (text_id, exact_date, tokenszam, text, napirendi_pont, video_felszolalas_ido, video_feszolalas_url, felszolalas_url, covid, cycle_number, parliamentary_id)
         dao.execute_insert(insert_statement, data)
 
         major_topic = __replace_zero_to_none(row['major_topic'])
@@ -111,11 +112,14 @@ def __populate_table_kepviselo(df: pd.DataFrame, drop: bool) -> None:
 
     # party_id -hoz előbb be kell olvasni a párt-képviselő kapcsolatokat tartalmazó táblát egy dict-be
     reader = src.loadExcelToDataframe
-    df_party_person = reader.load("resoures/party_person.xlsx")
-    dict_party_person = defaultdict(list)
+    df_party_person = reader.load("C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\party_person.xlsx")
+    dict_party_person = dict()
 
     for index, row in df_party_person.iterrows():
-        dict_party_person[row['parliamentary_id']].append([row['party_id'], row['party_pers_from'], row['party_pers_to']])
+        if row['parliamentary_id'] not in dict_party_person:
+            dict_party_person[row['parliamentary_id']] = [row['party_id'], row['party_pers_from'], row['party_pers_to']]
+        else:
+            dict_party_person[row['parliamentary_id']].append([row['party_id'], row['party_pers_from'], row['party_pers_to']])
 
     for index, row in df.iterrows():
 
@@ -130,7 +134,10 @@ def __populate_table_kepviselo(df: pd.DataFrame, drop: bool) -> None:
         change_name = __replace_zero_to_none(row['change_name'])
         surname_new = __replace_zero_to_none(row['surname_new'])
         surname_from = __replace_zero_to_none(row['surname_from'])
-        party_id = __replace_zero_to_none(dict_party_person[parliamentary_id][0][0])
+        try:
+            party_id = __replace_zero_to_none(dict_party_person[parliamentary_id][0][0])
+        except:
+            party_id = None
 
         insert_statement = ("INSERT INTO `kepviselo` (`parliamentary_id`, `birth_year`, `birth_place`, `sex`, `death_date`, `death_place`, `first_name`, `surname`, `change_name`, `surname_new`, `surname_from`, `party_id`) " "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
         data = (parliamentary_id, birth_year, birth_place, sex, death_date, death_place, first_name, surname, change_name, surname_new, surname_from, party_id)

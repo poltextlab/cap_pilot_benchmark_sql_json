@@ -21,6 +21,7 @@ RUNTIME_TEST = False
 CREATE_SQL = False
 CREATE_JSON_AFTER_SQL = True
 
+########################################### DO NOT MODIFIY BELOW! ######################################################
 
 def main():
 
@@ -35,11 +36,11 @@ def main():
         nlp = hu_core_news_lg.load()
 
         files = {
-            "parlamenti_ciklus" : "resoures/cycle_kész.xlsx",
-            "cap_code" : "resoures/CAP_CODE.xlsx",
-            "part" : "resoures/party_name_full_hun.xlsx",
-            "kepviselo" : "resoures/demo_kész.xlsx",
-            "felszolalas" : "resoures/text_jav.xlsx"
+            "parlamenti_ciklus" : "C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\cycle_kész.xlsx",
+            "cap_code" : "C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\CAP_CODE.xlsx",
+            "part" : "C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\party_name_full_hun.xlsx",
+            "kepviselo" : "C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\demo_kész.xlsx",
+            "felszolalas" : "C:\\Users\\uvege\\PycharmProjects\\xlsToSQL\\resoures\\text_jav.xlsx"
         }
 
         inserter = src.populate_tables
@@ -62,7 +63,6 @@ def main():
     if CREATE_JSON_AFTER_SQL:
         creator = src.create_json_from_sql
         creator.start(config.OUTPUT_JSON)
-
 
     if RUNTIME_TEST:
         end_time = datetime.datetime.now()
